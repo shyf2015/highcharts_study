@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+<style>
+    div{
+        float: left;
+        width: 300px;
+        height: 300px;
+        margin-left: 50px;
+        margin-top: 50px;
+    }
+</style>
+</head>
+<body>
+    <div id="div1"></div>
+    <div id="div2"></div>
+    <div id="div3"></div>
+<script src="node_modules/jquery/dist/jquery.min.js"></script>
+<script src="node_modules/highcharts/highcharts.js"></script> 
+<script>
+    $('#div1').highcharts({
+        title: {
+            text: '2016年各品牌手机销售量'
+        },
+        tooltip: {
+            valueSuffix: '台'
+        },
+        xAxis: {
+            categories:['一','二','三','四','五','六'],
+            title:{
+                text: '月份(月)'
+            }
+        },
+        yAxis: {
+            title:{
+                text: '销量(台)'
+            }
+        },
+        series: [{
+            name: '苹果',
+            data: [220,120,90,140,155,160]
+        },{
+            name: '小米',
+            data: [200,100,120,130,150,190]
+        },{
+            name: '华为',
+            data: [80,100,110,130,120,90]
+        }]
+    })
+     $('#div2').highcharts({
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: '2016年各品牌手机销售量'
+        },
+        tooltip: {
+            valueSuffix: '台'
+        },
+        xAxis: {
+            categories:['一','二','三','四','五','六'],
+            title:{
+                text: '月份(月)'
+            }
+        },
+        yAxis: {
+            title:{
+                text: '销量(台)'
+            }
+        },
+        series: [{
+            name: '苹果',
+            data: [220,120,90,140,155,160]
+        },{
+            name: '小米',
+            data: [200,100,120,130,150,190]
+        },{
+            name: '华为',
+            data: [80,100,110,130,120,90]
+        }]
+    })
+    var json =  [
+                {
+                    name: '苹果',
+                    sliced: false,
+                    selected: true,
+                    y: 0.2
+                },{
+                    name: '小米',
+                    sliced: false,
+                    selected: true,
+                    y: 0.3
+                },{
+                    name: '华为',
+                    sliced: false,
+                    selected: true,
+                    y: 0.5
+                }
+            ]
+    callback();
+function callback(){
+    $('#div3').highcharts({
+        chart: {
+            type: 'pie',
+        },
+        plotOptions: {
+            pie: {
+                cursor: 'pointer',
+                events: {
+                    click: function(e){
+                        json.forEach(function(ev){
+                            if(ev.name == e.point.name){
+                                ev.sliced = true;
+                            }
+                        })
+                        callback();
+                    }
+                }
+            }
+        },
+        title: {
+            text: '2016年各品牌手机销售量'
+        },
+        tooltip: {
+            valueSuffix: '台'
+        },
+        xAxis: {
+            categories:['一','二','三','四','五','六'],
+            title:{
+                text: '月份(月)'
+            }
+        },
+        yAxis: {
+            title:{
+                text: '销量(台)'
+            }
+        },
+        series: [{
+            name: '所占比例',
+            data: json
+        }]
+    })
+}
+</script>
+</body>
+</html>
